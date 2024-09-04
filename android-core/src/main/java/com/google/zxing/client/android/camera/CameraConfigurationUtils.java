@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 public final class CameraConfigurationUtils {
 
   private static final String TAG = "CameraConfiguration";
+  private static final String FOCUS_MODE_LABEL = "focus mode";
 
   private static final Pattern SEMICOLON = Pattern.compile(";");
 
@@ -60,11 +61,11 @@ public final class CameraConfigurationUtils {
     String focusMode = null;
     if (autoFocus) {
       if (safeMode || disableContinuous) {
-        focusMode = findSettableValue("focus mode",
+        focusMode = findSettableValue(FOCUS_MODE_LABEL,
                                        supportedFocusModes,
                                        Camera.Parameters.FOCUS_MODE_AUTO);
       } else {
-        focusMode = findSettableValue("focus mode",
+        focusMode = findSettableValue(FOCUS_MODE_LABEL,
                                       supportedFocusModes,
                                       Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE,
                                       Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO,
@@ -73,7 +74,7 @@ public final class CameraConfigurationUtils {
     }
     // Maybe selected auto-focus but not available, so fall through here:
     if (!safeMode && focusMode == null) {
-      focusMode = findSettableValue("focus mode",
+      focusMode = findSettableValue(FOCUS_MODE_LABEL,
                                     supportedFocusModes,
                                     Camera.Parameters.FOCUS_MODE_MACRO,
                                     Camera.Parameters.FOCUS_MODE_EDOF);
