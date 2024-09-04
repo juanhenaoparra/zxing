@@ -43,10 +43,14 @@ public final class PDF417EncoderTestCase extends Assert {
   }
   
   @Test
-  public void testEncodeIso88591WithSpecialChars() throws Exception {
-    // Just check if this does not throw an exception
-    PDF417HighLevelEncoder.encodeHighLevel("asdfg§asd", Compaction.AUTO, StandardCharsets.ISO_8859_1, false);
-  }
+public void testEncodeIso88591WithSpecialChars() throws Exception {
+    String input = "asdfg§asd";
+    String expectedEncoded = "YXNkZmc=\";
+
+    String encodedResult = PDF417HighLevelEncoder.encodeHighLevel(input, Compaction.AUTO, StandardCharsets.ISO_8859_1, false);
+  
+    assertEquals(expectedEncoded, encodedResult);
+}
 
   @Test
   public void testEncodeText() throws Exception {
